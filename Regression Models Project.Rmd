@@ -1,0 +1,19 @@
+---
+title: "Regression Models Project"
+author: "RH"
+date: "December 7, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Load the data and necessay package
+```{r}
+library(datasets)
+library(ggplot2)
+data("mtcars")
+str(mtcars)
+```
+

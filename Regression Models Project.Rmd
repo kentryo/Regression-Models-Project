@@ -17,3 +17,27 @@ data("mtcars")
 str(mtcars)
 ```
 
+Convert variables of cyl, vs, am, gear and carb to factor variable to following analysis.
+```{r}
+mtcars$am   <- factor(mtcars$am,labels=c("Automatic","Manual"))
+mtcars$cyl  <- factor(mtcars$cyl)
+mtcars$vs   <- factor(mtcars$vs)
+mtcars$gear <- factor(mtcars$gear)
+mtcars$carb <- factor(mtcars$carb)
+```
+
+#Simple linear regression model to exmaine mpg
+```{r}
+fit1 <- lm(mpg ~ am, mtcars)
+summary(fit1)$coef
+```
+As is stated that the P-value of amManual variable is `r summary(fit1)$coef[2,4]`. This indicated that the difference between automatic and manual transmissions is significant.
+
+We could also validate the result using t-test.
+```{r}
+mtcars_auto <- mtcars[mtcars$am=="Automatic", ]
+mtcars_manual <- mtcars[mtcars$am=="Manual", ]
+t.test(mtcars_auto$mpg, mtcars_manual$mpg)
+```
+
+#

@@ -142,6 +142,21 @@ str(mtcars)</code></pre>
 ##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
 ##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
 ##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
+<p>Convert variables of cyl, vs, am, gear and carb to factor variable to following analysis.</p>
+<pre class="r"><code>mtcars$am   &lt;- factor(mtcars$am,labels=c(&quot;Automatic&quot;,&quot;Manual&quot;))
+mtcars$cyl  &lt;- factor(mtcars$cyl)
+mtcars$vs   &lt;- factor(mtcars$vs)
+mtcars$gear &lt;- factor(mtcars$gear)
+mtcars$carb &lt;- factor(mtcars$carb)</code></pre>
+</div>
+<div id="simple-linear-regression-model-to-exmaine-mpg" class="section level1">
+<h1>Simple linear regression model to exmaine mpg</h1>
+<pre class="r"><code>fit &lt;- lm(mpg ~ am, mtcars)
+summary(fit)$coef</code></pre>
+<pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) 17.147368   1.124603 15.247492 1.133983e-15
+## amManual     7.244939   1.764422  4.106127 2.850207e-04</code></pre>
+<p>As is stated that the P-value of amManual variable is 2.850207410^{-4}.</p>
 </div>
 
 

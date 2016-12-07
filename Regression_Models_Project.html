@@ -151,12 +151,51 @@ mtcars$carb &lt;- factor(mtcars$carb)</code></pre>
 </div>
 <div id="simple-linear-regression-model-to-exmaine-mpg" class="section level1">
 <h1>Simple linear regression model to exmaine mpg</h1>
-<pre class="r"><code>fit &lt;- lm(mpg ~ am, mtcars)
-summary(fit)$coef</code></pre>
+<pre class="r"><code>fit1 &lt;- lm(mpg ~ am, mtcars)
+summary(fit1)$coef</code></pre>
 <pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
 ## (Intercept) 17.147368   1.124603 15.247492 1.133983e-15
 ## amManual     7.244939   1.764422  4.106127 2.850207e-04</code></pre>
-<p>As is stated that the P-value of amManual variable is 2.850207410^{-4}.</p>
+<p>As is stated that the P-value of amManual variable is 2.850207410^{-4}. This indicated that the difference between automatic and manual transmissions is significant.</p>
+<p>We could also validate the result using t-test.</p>
+<pre class="r"><code>mtcars_auto &lt;- mtcars[mtcars$am==&quot;Automatic&quot;, ]
+mtcars_manual &lt;- mtcars[mtcars$am==&quot;Manual&quot;, ]
+t.test(mtcars_auto$mpg, mtcars_manual$mpg)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  mtcars_auto$mpg and mtcars_manual$mpg
+## t = -3.7671, df = 18.332, p-value = 0.001374
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -11.280194  -3.209684
+## sample estimates:
+## mean of x mean of y 
+##  17.14737  24.39231</code></pre>
+</div>
+<div id="multivariable-regression-model" class="section level1">
+<h1>Multivariable regression model</h1>
+<p>First we include all the variables in the data set to examine the relationship between mpg and other variables to select proper variables to build the model.</p>
+<pre class="r"><code>fit2 &lt;- lm(mpg ~ .-1, mtcars)
+summary(fit2)$coef</code></pre>
+<pre><code>##             Estimate  Std. Error    t value   Pr(&gt;|t|)
+## cyl4     23.87913244 20.06582026  1.1900402 0.25252548
+## cyl6     21.23043717 18.33416483  1.1579713 0.26498157
+## cyl8     23.54296946 18.22249667  1.2919728 0.21591810
+## disp      0.03554632  0.03189920  1.1143329 0.28267339
+## hp       -0.07050683  0.03942556 -1.7883534 0.09393155
+## drat      1.18283018  2.48348458  0.4762784 0.64073922
+## wt       -4.52977584  2.53874584 -1.7842573 0.09461859
+## qsec      0.36784482  0.93539569  0.3932505 0.69966720
+## vs1       1.93085054  2.87125777  0.6724755 0.51150791
+## amManual  1.21211570  3.21354514  0.3771896 0.71131573
+## gear4     1.11435494  3.79951726  0.2932886 0.77332027
+## gear5     2.52839599  3.73635801  0.6767007 0.50889747
+## carb2    -0.97935432  2.31797446 -0.4225044 0.67865093
+## carb3     2.99963875  4.29354611  0.6986390 0.49546781
+## carb4     1.09142288  4.44961992  0.2452845 0.80956031
+## carb6     4.47756921  6.38406242  0.7013668 0.49381268
+## carb8     7.25041126  8.36056638  0.8672153 0.39948495</code></pre>
 </div>
 
 

@@ -40,4 +40,9 @@ mtcars_manual <- mtcars[mtcars$am=="Manual", ]
 t.test(mtcars_auto$mpg, mtcars_manual$mpg)
 ```
 
-#
+#Multivariable regression model
+First we include all the variables in the data set to examine the relationship between mpg and other variables to select proper variables to build the model.
+```{r}
+fit2 <- lm(mpg ~ ., mtcars)
+summary(fit2)
+```
